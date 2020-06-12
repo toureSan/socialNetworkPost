@@ -1,57 +1,52 @@
-import React, {useState, useEffect} from 'react'; 
+import React, {useState} from 'react'; 
 import axios from 'axios'; 
 
 export default function AuthForm ({role}){
-    const [jwt, setJwt] = useState({
-        identifier: "", 
-        password:""
-    })
-    const [user, setUser] = useState([]);
+    const [identifier, setIdentifier] = useState(''); 
+    const [password, setPassword] = useState(''); 
+   
 
     const handleChange = e => {
-        setJwt({
-           ...jwt,
-           [e.target.name]: e.target.value
-       })
-    }
-   
-    const handleSubmit = e =>{
-        
-      
-        console.log(jwt)
-        axios.post(`https://strapi-crea.5ika.org/auth/local${role}`, jwt)
-            .then(res => {
-            setJwt(res.data.jwt); 
-            setUser(res.data.user); 
-            })
-            .catch(err => console.log(err))    
-            
+       setIdentifier(
+           e.target.value
+       )
     }
 
-    useEffect(() =>{
-        handleSubmit();
-    });
-    
+    const handleChangePassword = e => {
+        setPassword(
+            e.target.value
+        )
+    }
+   
+    const handleSubmit = e =>{ 
+        e.preventDefault();
+        axios.post(`https://strapi-crea.5ika.org/auth/local`, {identifier, password})
+           
+             .then(
+                 res => {JSON.stringify(localStorage.setItem('data',res));}
+                )
+            .catch(err => console.log(err))    
+    }
+
     return ( 
         <div>
             <h1>please {role}</h1>
             <form onSubmit={handleSubmit}>
                 <input  
-                    name="username"
-                    type="text"
-                    value={jwt.identifier}
+                    field='identifier'
+                    value={identifier}
                     onChange={handleChange}
                     placeholder="votre nom"
                     />
                 <input
                     name="password"
                     type="password"
-                    value={jwt.password}
-                    onChange={handleChange} 
+                    value={password}
+                    onChange={handleChangePassword} 
                     />
-                    <button type="submit">Connection</button>
-                    
+                    <button onClick={handleSubmit}>Connection</button>
             </form>
+
         </div>
     )
 }

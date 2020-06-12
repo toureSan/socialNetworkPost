@@ -19,7 +19,7 @@ function App() {
         <Navigation />
         
          <Route path="/login" render={props => <AuthForm {...props} role="login" />} />
-         <Route path="/register" render={ props => <AuthForm {...props} role="register" />} />
+         {/* <Route path="/register" render={ props => <AuthForm {...props} role="register" />} /> */}
          {/* <Route path="/listUsers" component={ListUsers} /> */}
         </div>
       </SocialContext.Provider>
