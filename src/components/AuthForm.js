@@ -1,13 +1,13 @@
 import React, {useState} from 'react'; 
 import axios from 'axios'; 
 
-export default function AuthForm ({role}){
-    const [identifier, setIdentifier] = useState(''); 
+export default function AuthForm ({role, history}){
+    const [Usernanme, setUsernanme] = useState(''); 
     const [password, setPassword] = useState(''); 
    
 
     const handleChange = e => {
-       setIdentifier(
+       setUsernanme(
            e.target.value
        )
     }
@@ -20,11 +20,16 @@ export default function AuthForm ({role}){
    
     const handleSubmit = e =>{ 
         e.preventDefault();
-        axios.post(`https://strapi-crea.5ika.org/auth/local`, {identifier, password})
+        axios.post(`https://strapi-crea.5ika.org/auth/local`, {Usernanme, password})
            
              .then(
-                 res => {JSON.stringify(localStorage.setItem('data',res));}
-                )
+                 res => {
+               
+                     localStorage.setItem("token",res.data.token);
+                     history.push('/posts');
+                    }
+            )
+
             .catch(err => console.log(err))    
     }
 
@@ -33,8 +38,8 @@ export default function AuthForm ({role}){
             <h1>please {role}</h1>
             <form onSubmit={handleSubmit}>
                 <input  
-                    field='identifier'
-                    value={identifier}
+                    field='Usernanme'
+                    value={Usernanme}
                     onChange={handleChange}
                     placeholder="votre nom"
                     />
