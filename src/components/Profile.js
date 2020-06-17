@@ -4,7 +4,7 @@ import { SocialContext } from "../context/SocialContext";
 import { Card, Button, Container } from 'react-bootstrap';
 
 export default function Profile() {
-    const { profile, setProfile, firstname, lastName, bio } = useContext(SocialContext)
+    const { profile, setProfile } = useContext(SocialContext)
     const [editProfile, setEditProfile] = useState();
     const [editedProfile, setEditedProfile] = useState({
         firstname: "",
