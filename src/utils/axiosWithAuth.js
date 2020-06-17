@@ -3,7 +3,8 @@ import axios from 'axios';
 const axiosWithAuth = () => {
 
     
-    const data = localStorage.getItem('data');
+    const data = JSON.parse(localStorage.getItem('data')) ;
+    
     
     return axios.create({
         baseURL: "",

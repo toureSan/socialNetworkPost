@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(to bottom, #f05053, #e1eec3);
+   background:lightblue;
     height: 100%;
     margin: 0;
     color: black;
@@ -25,13 +25,14 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [ postList, setPostList ] = useState([]);
-
+  const [user, setUser] = useState([])
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("data")) ? true : false);
 
   return (
     <>
     <GlobalStyle />
     <Router>
-      <SocialContext.Provider value={{postList,setPostList}}>
+      <SocialContext.Provider value={{postList,setPostList, user, setUser, loggedIn, setLoggedIn}}>
         <div className="App">
         <Navigation />
          <Route path="/login" render={props => <AuthForm {...props} role="login" />} />

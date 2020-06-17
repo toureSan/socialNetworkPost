@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useContext} from 'react'; 
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { SocialContext} from "../context/SocialContext";
+import { Container, Row, Col,Card } from 'react-bootstrap';
+
+
 export default function ListPost (){
   
   const { postList, setPostList } = useContext(SocialContext);
- 
+
   useEffect(_ => {
   
     axiosWithAuth().get("https://strapi-crea.5ika.org/posts")
        
-        .then(res => { console.log(res.data); setPostList(res.data)  })
+        .then(res => { console.log(res.data); setPostList(res.data) })
         .catch(err => console.log(err))
 }) 
 
@@ -17,16 +20,29 @@ export default function ListPost (){
 
     <>
      
-        <h1>hello</h1>
-      {postList.map(item =>{
+      <Container fluid="md">
+      <h1> Listes des postes</h1>
+      {postList.map(postList =>{
         return (
-          <div key={item.id}>
-            <h2>{item.title}</h2>
-            <h2>{item.content}</h2>
-            <h2>{item.user}</h2>
-          </div>
+         
+          <Row>
+          <Col>
+          <Card style={{ marginBottom: '1rem' }}>
+          <Card.Body key={postList}>
+          <Card.Title><strong>ID:</strong> {postList.id}</Card.Title>
+            <Card.Title><strong>{postList.title}</strong></Card.Title>
+            <Card.Text>{postList.content}</Card.Text>
+          </Card.Body>
+          </Card>
+          </Col>
+          </Row>
+        
         )
-      })}
+        
+      }) }
+       </Container>
+
+
     
     </>
   )
