@@ -47,8 +47,9 @@ const StyledButton = styled.button`
 export default function AuthForm({ role, history }) {
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState([]); 
     const {setLoggedIn} = React.useContext(SocialContext);
+    
     const handleChange = e => {
         setIdentifier(
             e.target.value
@@ -66,11 +67,8 @@ export default function AuthForm({ role, history }) {
                 res => {
                     setLoggedIn(true); 
                     localStorage.setItem('data', JSON.stringify(res.data));
-                    history.push('/listPost');
-                    // console.log(res.data.user);
-                    // history.push('/registerForm');
-
-                    
+                    history.push('/profile')  
+                     
                 })
             
             .catch(err =>

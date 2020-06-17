@@ -1,8 +1,7 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom'; 
 import { SocialContext } from '../context/SocialContext';
-
-
+import {Button } from 'react-bootstrap'; 
 export default function Navigation (){
     const {loggedIn, setLoggedIn} = React.useContext(SocialContext);
     const logout = _ =>{
@@ -12,13 +11,14 @@ export default function Navigation (){
     return ( 
         <div>
       {loggedIn 
-            ? <Link onClick={logout}>Log Out</Link>
+            ? <Button className="danger" onClick={logout}>Log Out</Button>
             : <>
               <Link to="/login">Please Login</Link>
             <Link to="/register">Please Sign up</Link>
             </>}
-             <Link to="/listUsers">Liste Utilisateurs</Link>
+             <Link to="/listUser">Liste Utilisateurs</Link>
             <Link to="/listPost">Liste Posts</Link>
+            <Link to="/profile">Mon profile</Link>
       
           
           
