@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
+import { SocialContext } from '../context/SocialContext';
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ export default function AuthForm({ role, history }) {
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [user, setUser] = useState([])
-
+    const {setLoggedIn} = React.useContext(SocialContext);
     const handleChange = e => {
         setIdentifier(
             e.target.value
@@ -63,6 +64,7 @@ export default function AuthForm({ role, history }) {
         axios.post(`https://strapi-crea.5ika.org/auth/local`, { identifier, password })
             .then(
                 res => {
+                    setLoggedIn(true); 
                     localStorage.setItem('data', JSON.stringify(res.data));
                     history.push('/listPost');
                     // console.log(res.data.user);
@@ -72,7 +74,7 @@ export default function AuthForm({ role, history }) {
                 })
             
             .catch(err =>
-                history.push('/404')
+                history.push('/register')
             )
     }
 

@@ -6,13 +6,21 @@ import { Container, Row, Col,Card } from 'react-bootstrap';
 
 export default function ListPost (){
   
-  const { postList, setPostList } = useContext(SocialContext);
+  const { postList, setPostList} = useContext(SocialContext);
+
+
 
   useEffect(_ => {
   
     axiosWithAuth().get("https://strapi-crea.5ika.org/posts")
        
-        .then(res => { console.log(res.data); setPostList(res.data) })
+        .then(res => 
+          {
+          
+            console.log(res.data); 
+            setPostList(res.data)
+          
+          })
         .catch(err => console.log(err))
 }) 
 

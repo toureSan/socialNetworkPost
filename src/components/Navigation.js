@@ -6,15 +6,23 @@ import { SocialContext } from '../context/SocialContext';
 export default function Navigation (){
     const {loggedIn, setLoggedIn} = React.useContext(SocialContext);
     const logout = _ =>{
-        JSON.parse(localStorage.removeItem('data')) ;
+        localStorage.removeItem('data') ;
         setLoggedIn(false);
     }
     return ( 
         <div>
-            <Link to="/login">Please Login</Link>
+      {loggedIn 
+            ? <Link onClick={logout}>Log Out</Link>
+            : <>
+              <Link to="/login">Please Login</Link>
             <Link to="/register">Please Sign up</Link>
-            <Link to="/listUsers">Liste Utilisateurs</Link>
+            </>}
+             <Link to="/listUsers">Liste Utilisateurs</Link>
             <Link to="/listPost">Liste Posts</Link>
+      
+          
+          
+
         </div>
     )
 }
