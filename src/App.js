@@ -7,8 +7,8 @@ import { SocialContext } from './context/SocialContext';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 // import PrivateRoute from './utils/PrivateRoute'; 
 import styled, { createGlobalStyle, css } from 'styled-components';
-
-
+import ListPost from './components/ListPost';
+import PrivateRoute from './utils/PrivateRoute';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -24,19 +24,19 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  // const [ listPost, setPost ] = useState([]);
+  const [ postList, setPostList ] = useState([]);
 
 
   return (
     <>
     <GlobalStyle />
     <Router>
-      <SocialContext.Provider>
+      <SocialContext.Provider value={{postList,setPostList}}>
         <div className="App">
         <Navigation />
          <Route path="/login" render={props => <AuthForm {...props} role="login" />} />
          <Route path="/register" render={ props => <RegisterForm {...props} role="register" />} />
-         {/* <Route path="/listPost" component={ListPost} /> */}
+         <PrivateRoute path="/listPost" component={ListPost} />
         </div>
       </SocialContext.Provider>
     </Router>

@@ -6,7 +6,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={props => {
-                if (JSON.parse(localStorage.getItem('data'))) {
+                if (localStorage.getItem('data')) {
                     return <Component {...props} />
                 }
                 return <Redirect to='/login' />
@@ -14,4 +14,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         />
     )
 }
-export default ProviateRoute; 
+export default PrivateRoute; 

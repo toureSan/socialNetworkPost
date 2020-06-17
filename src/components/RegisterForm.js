@@ -108,8 +108,6 @@ export default function Navigation({ role,history }) {
             )
 
     }
-
-
     return (
         <>
         <StyledFormWrapper>

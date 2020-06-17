@@ -2,12 +2,16 @@ import axios from 'axios';
 
 const axiosWithAuth = () => {
 
-    const token = localStorage.getItem('data');
+    
+    const data = localStorage.getItem('data');
+    
     return axios.create({
         baseURL: "",
         headers: {
-            autorization: token
+            authorization: `Bearer ${data.jwt}`,
+            
         }
+
     })
 
 }

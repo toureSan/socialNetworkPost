@@ -2,12 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
 
-
-
-
-
-
-
 const StyledFormWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -70,11 +64,13 @@ export default function AuthForm({ role, history }) {
             .then(
                 res => {
                     localStorage.setItem('data', JSON.stringify(res.data));
-                    setUser(res.data.user);
-                    history.push('/home');
+                    history.push('/listPost');
                     // console.log(res.data.user);
                     // history.push('/registerForm');
+
+                    
                 })
+            
             .catch(err =>
                 history.push('/404')
             )
@@ -82,7 +78,6 @@ export default function AuthForm({ role, history }) {
 
     return (
         <>
-           
             <StyledFormWrapper>
                 <StyledForm onSubmit={handleSubmitAuth}>
                 <h1>Please {role}</h1>
@@ -103,12 +98,9 @@ export default function AuthForm({ role, history }) {
                         onChange={handleChangePassword}
                         
                     />
- 
                     <StyledButton onClick={handleSubmitAuth}>Connection</StyledButton>
-              
-
                 </StyledForm>
-                {/* <p>{user & user.username}</p> */}
+            
             </StyledFormWrapper>
         </>
     )
