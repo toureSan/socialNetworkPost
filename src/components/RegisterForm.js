@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 
 
@@ -54,7 +54,7 @@ const StyledTextArea = styled.textarea`
   resize: none;
 
 `;
-export default function Navigation({ role,history }) {
+export default function Navigation({ role, history }) {
     const [username, setUserName] = useState('');
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
@@ -100,7 +100,7 @@ export default function Navigation({ role,history }) {
                 res => {
                     //   console.log(res)
                     localStorage.setItem('data', JSON.stringify(res.data));
-                    history.push('/home');
+                    history.push('/profile');
                 })
 
             .catch(err =>
@@ -110,57 +110,57 @@ export default function Navigation({ role,history }) {
     }
     return (
         <>
-        <StyledFormWrapper>
-        <StyledForm onSubmit={handleSubmitRegister}>
-        <h1>Please {role}</h1>
-            <StyledInputRegister
-                field='email'
-                value={email}
-                onChange={handleChangeEmail}
-                placeholder="votre email"
-            />
+            <StyledFormWrapper>
+                <StyledForm onSubmit={handleSubmitRegister}>
+                    <h1>Please {role}</h1>
+                    <StyledInputRegister
+                        field='email'
+                        value={email}
+                        onChange={handleChangeEmail}
+                        placeholder="votre email"
+                    />
 
-            <StyledInputRegister
-                field='userName'
-                value={username}
-                onChange={handleChangeUserName}
-                placeholder="Your username"
-            />
+                    <StyledInputRegister
+                        field='userName'
+                        value={username}
+                        onChange={handleChangeUserName}
+                        placeholder="Your username"
+                    />
 
-            <StyledInputRegister
-                field='firstName'
-                value={firstname}
-                onChange={handleChangeFirstName}
-                placeholder="Your firstname"
-            />
+                    <StyledInputRegister
+                        field='firstName'
+                        value={firstname}
+                        onChange={handleChangeFirstName}
+                        placeholder="Your firstname"
+                    />
 
-            <StyledInputRegister
-                field='lastName'
-                value={lastname}
-                onChange={handleChangeLastName}
-                placeholder="Your lastname"
-            />
+                    <StyledInputRegister
+                        field='lastName'
+                        value={lastname}
+                        onChange={handleChangeLastName}
+                        placeholder="Your lastname"
+                    />
 
 
-            <StyledInputRegister
-                name="password"
-                type="password"
-                value={password}
-                onChange={handleChangePassword}
-                placeholder="Password is required"
-            />
+                    <StyledInputRegister
+                        name="password"
+                        type="password"
+                        value={password}
+                        onChange={handleChangePassword}
+                        placeholder="Password is required"
+                    />
 
-            <StyledTextArea
-                name="bio"
-                type="bio"
-                value={bio}
-                onChange={handleChangeBio}
-                placeholder="Biographie is required"
-            />
+                    <StyledTextArea
+                        name="bio"
+                        type="bio"
+                        value={bio}
+                        onChange={handleChangeBio}
+                        placeholder="Biographie is required"
+                    />
 
-            <StyledButton onClick={handleSubmitRegister}>Sign up</StyledButton>
-        </StyledForm>
-        </StyledFormWrapper>
+                    <StyledButton onClick={handleSubmitRegister}>Sign up</StyledButton>
+                </StyledForm>
+            </StyledFormWrapper>
         </>
     )
 }

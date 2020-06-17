@@ -1,4 +1,4 @@
-import React, {  useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { SocialContext } from "../context/SocialContext";
 import { Container, Card } from 'react-bootstrap';
@@ -7,20 +7,15 @@ export default function ListPost() {
 
   const { listUser, setListUser } = useContext(SocialContext);
 
-
-
   useEffect(_ => {
-
-    axiosWithAuth().get("https://strapi-crea.5ika.org/users")
-
+    axiosWithAuth().get("https://strapi-crea.5ika.org/users/")
       .then(res => {
-
         console.log(res.data);
         setListUser(res.data)
-
       })
       .catch(err => console.log(err))
   })
+
   return (
     <>
       <Container fluid="md">
@@ -38,10 +33,7 @@ export default function ListPost() {
           )
 
         })}
-
-
       </Container >
-
     </>
   )
 }
